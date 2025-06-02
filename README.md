@@ -1,17 +1,16 @@
-In diesem Repository soll dokumentiert werden, wie die Forschungsdaten des Projekts „VAMOD” am Leibniz-Institut für Geschichte und Kultur des östlichen Europa (GWZO) für einen Datenimport in die Graphdatenbank „Factgrid” vorbereitet und aufbereitet wurden.
+In diesem Repository wird dokumentiert, wie die Forschungsdaten des Projekts „VAMOD“ am Leibniz-Institut für Geschichte und Kultur des östlichen Europa (GWZO) für den Import in die Graphdatenbank FactGrid aufbereitet und vorbereitet wurden.
 
 ## Projektseite und Erklärungen zum Projekt
 
 [https://database.factgrid.de/wiki/FactGrid:VAMOD](https://database.factgrid.de/wiki/FactGrid:VAMOD)
 
-Die Forschungsdaten liegen in Form von verschiedenen Excel-Tabellen und PDF-Dateien vor. Ziel ist es, die Informationen so aufzuarbeiten und zu bereinigen, dass einzelne, gut strukturierte CSV-Dateien erstellt werden können, die anschließend über Quickstatements bei Factgrid eingepflegt werden können.
+Die Forschungsdaten liegen in unterschiedlichen Excel-Tabellen und PDF-Dokumenten vor. Ziel ist es, diese Informationen so zu bereinigen und aufzubereiten, dass daraus klar strukturierte CSV-Dateien entstehen, die sich über QuickStatements in FactGrid importieren lassen.
 
-Das Ziel besteht darin, am Ende ca. 600 Urkunden in einem großen Import in die Datenbank zu bringen. Für den Import der Urkundenliste müssen zunächst jedoch alle anderen Informationen, die in den Urkunden stehen, in FactGrid vorhanden sein. Denn anders als in einer klassischen relationalen Datenbank stehen in der FactGrid-Datenbank die Daten in Form von Knoten (Entitäten) und Kanten (Beziehungen) zueinander. Das heißt, Informationen sind bereits mit anderen Informationen verknüpft und müssen in ein bestehendes Netzwerk eingepflegt werden, das sich dynamisch verändert.
+Geplant ist ein umfassender Import von rund 600 Urkunden. Damit dieser reibungslos erfolgen kann, müssen zunächst alle in den Urkunden enthaltenen Informationen – wie Orte, Personen, Ämter oder Rechtsakte – bereits in FactGrid vorhanden sein. Denn im Unterschied zu klassischen relationalen Datenbanken basiert FactGrid auf einem graphbasierten Modell: Daten werden in Form von Tripeln gespeichert, bestehend aus Knoten (Entitäten) und Kanten (Beziehungen). Neue Informationen müssen daher in ein bestehendes, dynamisch wachsendes Netzwerk eingebunden werden.
 
-Damit die Urkunden eingepflegt werden können, muss zunächst kontrolliert werden, ob Informationen aus den Urkunden, wie etwa Orte, Personen, innegehabte Ämter und Rechtsakte, bereits in der Factgrid-Datenbank vorhanden sind oder ob sie ggf. noch angelegt werden müssen.
+Bevor die Urkunden importiert werden können, ist daher zu prüfen, ob alle benötigten Entitäten bereits existieren oder noch angelegt werden müssen. So müssen etwa Ämter bereits vorhanden sein, bevor Personen mit diesen Ämtern erfasst werden können. Erst danach ist es möglich, die Urkunden samt ihrer Bezüge korrekt anzulegen.
 
-Zuerst legt man die Informationen an, auf die andere Informationen aufbauen.  
-Damit Personen mit Ämtern eingepflegt werden können, müssen zuerst die Ämter angelegt werden. Danach können die Urkunden mit den genannten Personen angelegt werden. Die einzelnen Schichten sind durch die Ordner dargestellt. In der Readme wird erklärt, wie man aus den Forschungsdaten mithilfe von Python-Skripten, Open Refine und manuellen Anreicherungen ein importfähiges CSV-File erstellt, um die einzelne Schicht in Factgrid zu importieren.
+Die Importlogik folgt dabei einer hierarchischen Struktur, die sich in der Ordnerstruktur widerspiegelt. In der zugehörigen Readme wird erläutert, wie aus den Rohdaten mit Hilfe von Python-Skripten, OpenRefine und manuellen Ergänzungen Schritt für Schritt importfähige CSV-Dateien erstellt werden, mit denen sich die jeweiligen Informationsschichten in FactGrid einpflegen lassen.
 
 
 ---
