@@ -1,6 +1,4 @@
-In diesem Repository wird dokumentiert, wie die Forschungsdaten des Projekts „VAMOD“ am Leibniz-Institut für Geschichte und Kultur des östlichen Europa (GWZO) für den Import in die Graphdatenbank FactGrid aufbereitet und vorbereitet wurden.
-
-## Projektseite und Erklärungen zum Projekt
+# Projektseite und Erklärungen zum Projekt
 
 [https://database.factgrid.de/wiki/FactGrid:VAMOD](https://database.factgrid.de/wiki/FactGrid:VAMOD)
 

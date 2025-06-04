@@ -41,3 +41,8 @@ Dieses Skript ergänzt eine Excel-Tabelle historischer Urkunden (*Urkunden_Reper
 
 Die Idee ist, mithilfe des im Repertorium enthaltenen Orts- und Namensregisters sowie der Ortsliste aus dem Regest alle Entitäten zu extrahieren. Durch den Abgleich mit der Ortsliste werden Orte identifiziert, während verbleibende Entitäten als Namen bzw. Begünstigte im Regest erfasst werden. Dieser Schritt ist fehleranfällig und soll perspektivisch durch den Einsatz eines LLMs verbessert werden.
 
+# 5. enrich_additional_place_information.py
+
+Kurzes Skript, das die in Urkunden_Repertorium_v1.xlsx gelisteten „Genannten Orte“ über das Referenzblatt Ortsdaten_Repertorium-aufbereitet.xlsx in „Empfängersitz“ und „Objektort“ klassifiziert und das Ergebnis in Urkunden_Repertorium_v2.xlsx speichert.
+
+

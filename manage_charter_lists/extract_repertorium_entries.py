@@ -14,6 +14,32 @@ MONTH_MAP = {
     'Okt.': 10, 'Nov.': 11, 'Dez.': 12
 }
 
+# Liste möglicher Aussteller (in der Reihenfolge, wie geprüft werden soll)
+aussteller_list = [
+    "Kazimierz III.",
+    "Ełżbieta Łokietkówna",
+    "Władysław Opolczyk",
+    "Ludwig von Anjou",
+    "Maria von Ungarn",
+    "Elisabeth von Bosnien",
+    "Władysław II. Jagiełło",
+    "Jadwiga von Anjou",
+    "Dmytro Det’ko",
+    "Otto von Pilica",
+    "Johannes Kmita",
+    "Andreas von Barabás",
+    "Johannes von Sprowa",
+    "Emerik Bebek",
+    "Johannes von Tarnów",
+    "Gnewosius von Dalewice",
+    "Florian von Korytnica",
+    "Ivan von Obiechów",
+    "Spytek von Tarnów",
+    "Petrus von Charbinowice",
+    "Johannes Mężyk von Dąbrowa",
+    "Vincentius von Szamotuły"
+]
+
 # Spalten der Ausgabetabelle
 COLUMNS = [
     'Nr. Rep', 'Datum', 'Aussteller', 'Ausstellungsort',
@@ -135,6 +161,15 @@ while i < len(lines):
 
     regest_text = ' '.join(regest_lines)
 
+    # Aussteller aus dem Regest extrahieren (der zuerst genannte in der Text‐Reihenfolge)
+    aussteller = ''
+    min_pos = len(regest_text) + 1
+    for name in aussteller_list:
+        pos = regest_text.find(name)
+        if pos != -1 and pos < min_pos:
+            min_pos = pos
+            aussteller = name
+
     # Überlieferung sammeln
     ueber_lines = []
     if j < len(lines) and lines[j].startswith(('Kopial', 'Original', 'Transsumpt', 'Verlorenes Original')):
@@ -200,7 +235,7 @@ while i < len(lines):
     records.append({
         'Nr. Rep': nr_rep,
         'Datum': date_str,
-        'Aussteller': '',
+        'Aussteller': aussteller,
         'Ausstellungsort': ausstellungsort,
         'Datumssicherheit': date_sicher,
         'Sicherheit Status Urkunde': status_urkunde,
