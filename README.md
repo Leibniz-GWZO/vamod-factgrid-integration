@@ -29,6 +29,9 @@ Dieser Ordner dient der Extraktion, Filterung und Vereinheitlichung historischer
 ### `place_extraction`
 Dieser Ordner enthält die Skripte zur Erstellung und Anreicherung eines konsolidierten Ortsverzeichnisses für alle im *Repertorium diplomatum terrae Russie Regni Poloniae* erwähnten Orte. Grundlage ist eine kuratierte Tabelle mit Ortsnennungen sowie eine manuell bereinigte Identifikationstabelle. Ziel ist es, Mehrfachnennungen durch historische Varianten zu erkennen, die Orte mit Editionseinträgen zu verknüpfen und externe QIDs zur Nachnutzung einzubinden.
 
+### `legal_types`
+Dieser Ordner enthält Skripte und Textdateien, die zur Klassifizierung der Rechtsnatur der Urkunden dienen. Ziel ist es, aus verschiedenen Quellen wie den Urkundenbetreffen oder externen Webseiten eine Taxonomie von Transaktionstypen zu extrahieren und zu erstellen. Diese Taxonomie hilft dabei, die Urkunden systematisch zu kategorisieren.
+
 ---
 
 ## gesammelte Erfahrungen:
