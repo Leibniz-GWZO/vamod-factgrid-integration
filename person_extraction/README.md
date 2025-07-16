@@ -15,3 +15,15 @@ Dieses Skript führt eine fuzzy-basierte Aggregation von Personen mit ihren Roll
 
 Die Skripte "person_matching.py" und "list_persons.py" sind noch alte Skripte in denen alle Personen extrahiert wurden und mit einem Cluster Verfahren gematcht wurden. Jedoch ist die Liste so groß das wir uns zunächst auf Personen mit bestimmten Rollen beschränkt haben.
 
+# 4. cluster_name_abbreviations.py
+
+Dieses Skript dient der Aggregation von Namensvarianten und Abkürzungen. Es liest eine Excel-Datei und fasst Zeilen zusammen, die vermutlich zur selben Person gehören. Der Prozess wird durch manuelle Markierungen (gelb hinterlegte Zellen) gesteuert, um verschiedene Schreibweisen eines Namens zu gruppieren.
+
+# 5. cluster_names_after_manual_lookup.py
+
+Dieses Skript finalisiert den Prozess der Namens-Clusterings nach einer manuellen Überprüfung. Es verarbeitet eine Excel-Datei, in der korrekte oder normalisierte Namen ("Normierte deutsche Schreibweise") grün markiert wurden. Anhand dieser Markierungen werden die Personendaten entsprechend gruppiert und zusammengefasst.
+
+# 6. add_charter_identifier_to_person.py
+
+Dieses Skript reichert die finale Personenliste mit der "Nr. Rep" (Nummer aus dem Repertorium) aus der Urkundenliste an. Es iteriert durch die lateinischen Schreibweisen der gennantnen Personen in den Urkunden und fügt die entsprechende "Nr. Rep" zu den Personen in der Personenliste hinzu, um eine direkte Verknüpfung zwischen Person und Urkunde herzustellen.
+

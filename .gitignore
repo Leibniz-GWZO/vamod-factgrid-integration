@@ -6,3 +6,7 @@ todo.txt
 Dokumentation*
 antrag*
 datasheets/
+Map
+*.docx
+LLM_evaluation/
+map_persons.py

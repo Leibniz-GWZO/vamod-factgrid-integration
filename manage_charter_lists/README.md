@@ -46,3 +46,4 @@ Die Idee ist, mithilfe des im Repertorium enthaltenen Orts- und Namensregisters 
 Kurzes Skript, das die in Urkunden_Repertorium_v1.xlsx gelisteten „Genannten Orte“ über das Referenzblatt Ortsdaten_Repertorium-aufbereitet.xlsx in „Empfängersitz“ und „Objektort“ klassifiziert und das Ergebnis in Urkunden_Repertorium_v2.xlsx speichert.
 
 
+

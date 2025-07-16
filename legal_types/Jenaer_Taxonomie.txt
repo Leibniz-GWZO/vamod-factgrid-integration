@@ -1,0 +1,17 @@
+Typ_von_Rechtsakt
+Weiherrecht
+Abschrift
+Kaufvertrag
+Verkauf
+Kredit
+Schlichtung
+Schürfrecht
+Zollbefreiung
+Privilegienvergabe
+Privilegienbestätigung
+Rechteentzug
+Rechtevergabe
+Rechtebestätigung
+Nutzungsrecht
+Zinsfestlegung
+Schürfrechte auf dem Aichelberg
