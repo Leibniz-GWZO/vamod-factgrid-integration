@@ -38,83 +38,86 @@ def main():
         nr_rep = row.get('Nr. Rep', '')
         if pd.isna(nr_rep):
             continue
-            
-        # Extract person information from charter
+
         for i in range(1, 99):  # Assuming max 99 persons per charter
             person_col = f'Lateinische Schreibweise genannte Person {i}'
             funktion_col = f'Funktion {i}'
             rolle_col = f'Rolle in Urkunde {i}'
-            
 
             if person_col not in urkunden_df.columns:
                 break
-                
+
             person_name = row.get(person_col, '')
             funktion = row.get(funktion_col, '')
             rolle = row.get(rolle_col, '')
+            urkunde_datum = row.get('Datum', '')
+            urkunde_edition_angaben = row.get('Angaben zu Drucken/Editionen', '')
 
-            print(person_name, funktion, rolle)
-            
             # Skip if person name is empty
             if pd.isna(person_name) or person_name == '':
                 continue
-                
-            print(f"Searching for: '{person_name}', Funktion: '{funktion}', Rolle: '{rolle}'")
-            
-            # Search for matches in person list
-            matches = []
-            
-            
-            for person_idx, person_row in personen_df.iterrows():
 
-                # Check if any name variant matches
-                name_match = False
+            print(f"Searching for: '{person_name}', Funktion: '{funktion}', Rolle: '{rolle}'")
+
+            # 1. Nur nach Namen suchen
+            name_matches = []
+            for person_idx, person_row in personen_df.iterrows():
                 for name_col in name_columns:
                     if name_col in personen_df.columns:
                         name_value = person_row.get(name_col, '')
                         if normalize_string(name_value) == normalize_string(person_name) and normalize_string(name_value) != '':
-                            name_match = True
+                            name_matches.append(person_idx)
                             break
-                
-                if not name_match:
-                    continue
+
+            matches = []
+
+            # 2. Falls mehrere Matches, versuche über Datum oder Edition zuzuordnen
+            if len(name_matches) == 1:
+                matches = name_matches
+            elif len(name_matches) > 1:
+                # Versuche über "Datum Funktion i"
+                date_refined_matches = []
+                if not pd.isna(urkunde_datum):
+                    for person_idx in name_matches:
+                        person_row = personen_df.loc[person_idx]
+                        for k in range(1, 28):
+                            datum_f_col = f'Datum Funktion {k}'
+                            if datum_f_col in person_row:
+                                person_datum_f = person_row.get(datum_f_col, '')
+                                if not pd.isna(person_datum_f) and str(urkunde_datum) == str(person_datum_f):
+                                    date_refined_matches.append(person_idx)
+                                    break  # Nächster person_idx
+
+                if len(date_refined_matches) == 1:
+                    matches = date_refined_matches
+                    print(f"DEBUG: Disambiguated '{person_name}' for Nr. Rep {nr_rep} by Datum Funktion: {urkunde_datum}")
+                else:
+                    # Wenn Datum nicht eindeutig war, versuche Edition als Substring
+                    candidates = date_refined_matches if len(date_refined_matches) > 0 else name_matches
+                    edition_refined_matches = []
+                    if not pd.isna(urkunde_edition_angaben):
+                        for person_idx in candidates:
+                            person_row = personen_df.loc[person_idx]
+                            for k in range(1, 28):
+                                edition_col = f'Edition {k}'
+                                if edition_col in person_row:
+                                    person_edition = person_row.get(edition_col, '')
+                                    if not pd.isna(person_edition) and str(person_edition).strip() and normalize_string(str(person_edition)) in normalize_string(str(urkunde_edition_angaben)):
+                                        edition_refined_matches.append(person_idx)
+                                        break  # Nächster person_idx
                     
-                # Check if function and role also match (must be from same index)
-                funktion_rolle_match = False
-                
-                # Check all function/role combinations with same index
-                for funktion_col in funktion_columns:
-                    person_funktion = person_row.get(funktion_col, '')
-                    
-                    # Extract index from function column name
-                    if ' ' in funktion_col:
-                        try:
-                            func_index = funktion_col.split(' ')[1]
-                            corresponding_rolle_col = f'Rolle in Urkunde {func_index}'
-                        except:
-                            corresponding_rolle_col = 'Rolle in Urkunde'
-                    else:
-                        corresponding_rolle_col = 'Rolle in Urkunde'
-                    
-                    # Check if corresponding role column exists
-                    if corresponding_rolle_col in personen_df.columns:
-                        person_rolle = person_row.get(corresponding_rolle_col, '')
-                        
-                        funktion_normalized = normalize_string(funktion)
-                        rolle_normalized = normalize_string(rolle)
-                        person_funktion_normalized = normalize_string(person_funktion)
-                        person_rolle_normalized = normalize_string(person_rolle)
-                        
-                        funktion_match = funktion_normalized == person_funktion_normalized
-                        rolle_match = rolle_normalized == person_rolle_normalized
-                        
-                        # Both function and role must match (empty values can match empty values)
-                        if funktion_match and rolle_match:
-                            funktion_rolle_match = True
-                            break
-                
-                if funktion_rolle_match:
-                    matches.append(person_idx)
+                    if len(edition_refined_matches) == 1:
+                        matches = edition_refined_matches
+                        print(f"DEBUG: Disambiguated '{person_name}' for Nr. Rep {nr_rep} by Edition substring.")
+                    elif len(edition_refined_matches) > 1:
+                        print(f"WARNING: Match für '{person_name}' (Nr. Rep {nr_rep}) gefunden, aber Zuordnung über Edition nicht eindeutig: {edition_refined_matches}")
+                        matches = [] # Nicht zuordnen
+                    else: # 0 edition matches
+                        if len(date_refined_matches) > 1:
+                             print(f"WARNING: Match für '{person_name}' (Nr. Rep {nr_rep}) gefunden, aber Zuordnung über Datum nicht eindeutig und Edition hat nicht geholfen. Kandidaten: {date_refined_matches}")
+                        else:
+                             print(f"WARNING: Match für '{person_name}' (Nr. Rep {nr_rep}) gefunden, aber Zuordnung nicht möglich. Kandidaten: {name_matches}")
+                        matches = [] # Nicht zuordnen
 
             # Handle matches
             if len(matches) == 1:
@@ -127,12 +130,12 @@ def main():
                     existing_values = str(current_nr_rep).split(';')
                     if str(nr_rep) not in existing_values:
                         personen_df.loc[matches[0], 'Nr. Rep'] = str(current_nr_rep) + ';' + str(nr_rep)
-                print(f"Added Nr. Rep {nr_rep} to person: {person_name}")
-            elif len(matches) > 1:
-                # Multiple matches - print warning
-                print(f"WARNING: Multiple matches found for person '{person_name}' with function '{funktion}' and role '{rolle}' from Nr. Rep {nr_rep}")
-                print(f"  Matched rows: {matches}")
-            else:
+                print(f"Added Nr. Rep {nr_rep} to person: {person_name} at index {matches[0]}")
+            elif len(name_matches) > 1 and len(matches) != 1:
+                # Multiple matches that could not be resolved to one.
+                # The warning has already been printed inside the disambiguation logic.
+                pass
+            elif len(name_matches) == 0:
                 print(f"No match found for: '{person_name}', Funktion: '{funktion}', Rolle: '{rolle}'")
     
     # Save the updated person list
