@@ -132,7 +132,8 @@ def prepare_factgrid_data():
             "P2": "Q517290",
             "Werktyp (P121)": "Q517290", 
             "Gelistet in (P124)": "Q1213987",
-            "Forschungsprojekte, die zu diesem Datensatz beitrugen (P ?)": "Q1206913"
+            "Forschungsprojekte, die zu diesem Datensatz beitrugen (P ?)": "Q1206913",
+            "Sekundärliteratur / Forschung (P12)": "Q1213984"
         }
         
         for column_name, replacement_value in column_replacements.items():
@@ -142,6 +143,22 @@ def prepare_factgrid_data():
                 df.loc[df[column_name].notna(), column_name] = replacement_value
             else:
                 print(f"Warning: Column '{column_name}' not found!")
+        
+        # Copy values from "Nr. Rep" to "Nr. in Rep. (qal90)"
+        source_column = "Nr. Rep"
+        target_column = "Nr. in Rep. (qal90)"
+        
+        if source_column in df.columns and target_column in df.columns:
+            # Copy non-null values from source to target column
+            non_null_values = df[source_column].notna()
+            values_to_copy = non_null_values.sum()
+            print(f"Copying {values_to_copy} values from '{source_column}' to '{target_column}'")
+            df.loc[non_null_values, target_column] = df.loc[non_null_values, source_column]
+        else:
+            if source_column not in df.columns:
+                print(f"Warning: Source column '{source_column}' not found!")
+            if target_column not in df.columns:
+                print(f"Warning: Target column '{target_column}' not found!")
         
         # Count total transformations
         converted_dates = df[date_column].astype(str).str.contains(r'^\+\d{4}-\d{2}-\d{2}T00:00:00Z/11$', na=False)
