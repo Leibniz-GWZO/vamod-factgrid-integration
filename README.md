@@ -17,6 +17,9 @@ Die Importlogik folgt dabei einer hierarchischen Struktur, die sich in der Ordne
 
 Die Skripte innerhalb der Ordner sind in einer sinnvollen Reihenfolge abgelegt, da bestimmte Verarbeitungsschritte aufeinander aufbauen und daher in einer festen Abfolge ausgeführt werden sollten. 
 
+### `material_charters`
+Dieser Ordner enthält Skripte zur schrittweisen Aufbereitung der materiellen Urkundenmetadaten für den FactGrid-Import. Die Skripte verarbeiten die Grundinformationen der physischen Urkunden (Aussteller, Empfänger, Datum, Ausstellungsort, Archiv) und bereiten sie mit mehrsprachigen Labels, Übersetzungen und FactGrid-QID-Verknüpfungen für den Import vor. Die Verarbeitung erfolgt in mehreren aufeinander aufbauenden Schritten von der Label-Erstellung über Übersetzungen bis zur finalen Formatierung.
+
 ### `manage_charte_lists`
 Der Ordner enthält Skripte und Daten zur automatisierten Extraktion, Normalisierung und Anreicherung historischer Urkundeneinträge aus PDF- und Excel-Dokumenten. Ziel ist die strukturierte Aufbereitung für den CSV-Import. Dafür müssen Informationen aus PDF-Dateien sowie aus Excel-Tabellen zusammengeführt werden. Hier entsteht die CSV-Datei, mit der alle Urkunden dann per Quickstatement-Import auf einmal importiert werden. Das ist der letzte Schritt des Schichtmodells.
 
