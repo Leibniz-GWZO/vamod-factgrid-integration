@@ -138,9 +138,15 @@ def prepare_factgrid_data():
         
         for column_name, replacement_value in column_replacements.items():
             if column_name in df.columns:
-                non_null_count = df[column_name].notna().sum()
-                print(f"Replacing all {non_null_count} non-null values in '{column_name}' with '{replacement_value}'")
-                df.loc[df[column_name].notna(), column_name] = replacement_value
+                # Special handling for "Sekundärliteratur / Forschung (P12)" - fill all rows
+                if column_name == "Sekundärliteratur / Forschung (P12)":
+                    total_rows = len(df)
+                    print(f"Filling all {total_rows} rows in '{column_name}' with '{replacement_value}'")
+                    df[column_name] = replacement_value
+                else:
+                    non_null_count = df[column_name].notna().sum()
+                    print(f"Replacing all {non_null_count} non-null values in '{column_name}' with '{replacement_value}'")
+                    df.loc[df[column_name].notna(), column_name] = replacement_value
             else:
                 print(f"Warning: Column '{column_name}' not found!")
         
@@ -159,6 +165,22 @@ def prepare_factgrid_data():
                 print(f"Warning: Source column '{source_column}' not found!")
             if target_column not in df.columns:
                 print(f"Warning: Target column '{target_column}' not found!")
+        
+        # Copy values from "Dde (wird mit Regest gefüllt)" to "Zusammenfassung (P724) "
+        source_column_regest = "Dde (wird mit Regest gefüllt)"
+        target_column_summary = "Zusammenfassung (P724) "
+        
+        if source_column_regest in df.columns and target_column_summary in df.columns:
+            # Copy non-null values from source to target column
+            non_null_values = df[source_column_regest].notna()
+            values_to_copy = non_null_values.sum()
+            print(f"Copying {values_to_copy} values from '{source_column_regest}' to '{target_column_summary}'")
+            df.loc[non_null_values, target_column_summary] = df.loc[non_null_values, source_column_regest]
+        else:
+            if source_column_regest not in df.columns:
+                print(f"Warning: Source column '{source_column_regest}' not found!")
+            if target_column_summary not in df.columns:
+                print(f"Warning: Target column '{target_column_summary}' not found!")
         
         # Count total transformations
         converted_dates = df[date_column].astype(str).str.contains(r'^\+\d{4}-\d{2}-\d{2}T00:00:00Z/11$', na=False)
