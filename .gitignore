@@ -8,6 +8,5 @@ antrag*
 datasheets/
 Map
 *.docx
-LLM_evaluation/
 map_persons.py
 .~lock*

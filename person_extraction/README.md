@@ -27,3 +27,7 @@ Dieses Skript finalisiert den Prozess der Namens-Clusterings nach einer manuelle
 
 Dieses Skript reichert die finale Personenliste mit der "Nr. Rep" (Nummer aus dem Repertorium) aus der Urkundenliste an. Es iteriert durch die lateinischen Schreibweisen der gennantnen Personen in den Urkunden und fügt die entsprechende "Nr. Rep" zu den Personen in der Personenliste hinzu, um eine direkte Verknüpfung zwischen Person und Urkunde herzustellen.
 
+# 7. add_standardised_spelling.py
+
+Dieses Skript standardisiert Personennamen durch Abgleich zwischen verschiedenen Datenquellen. Es liest die Personen.xlsx-Datei und das Urkunden_Repertorium_v4.xlsx und versucht, für Personen in den Spalten "Ade" (lateinische Namen) die entsprechenden standardisierten deutschen Schreibweisen aus dem Repertorium zu finden. Das Skript durchsucht die "Lateinische Schreibweise genannte Person"-Spalten im Repertorium nach exakten Übereinstimmungen und trägt die gefundenen standardisierten Namen in die "Lde"-Spalte ein. Dies ermöglicht eine einheitliche Namensschreibung und bessere Verknüpfung der Personendaten zwischen den verschiedenen Datenquellen.
+
