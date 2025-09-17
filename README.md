@@ -20,9 +20,6 @@ Die Skripte innerhalb der Ordner sind in einer sinnvollen Reihenfolge abgelegt, 
 ### `material_charters`
 Dieser Ordner enthält Skripte zur schrittweisen Aufbereitung der materiellen Urkundenmetadaten für den FactGrid-Import. Die Skripte verarbeiten die Grundinformationen der physischen Urkunden (Aussteller, Empfänger, Datum, Ausstellungsort, Archiv) und bereiten sie mit mehrsprachigen Labels, Übersetzungen und FactGrid-QID-Verknüpfungen für den Import vor. Die Verarbeitung erfolgt in mehreren aufeinander aufbauenden Schritten von der Label-Erstellung über Übersetzungen bis zur finalen Formatierung.
 
-### `manage_charte_lists`
-Der Ordner enthält Skripte und Daten zur automatisierten Extraktion, Normalisierung und Anreicherung historischer Urkundeneinträge aus PDF- und Excel-Dokumenten. Ziel ist die strukturierte Aufbereitung für den CSV-Import. Dafür müssen Informationen aus PDF-Dateien sowie aus Excel-Tabellen zusammengeführt werden. Hier entsteht die CSV-Datei, mit der alle Urkunden dann per Quickstatement-Import auf einmal importiert werden. Das ist der letzte Schritt des Schichtmodells.
-
 ### `person_extraction`
 Dieser Ordner enthält Skripte und Dokumentationen zur Extraktion, Filterung und Gruppierung historischer Personen mit relevanten Rollen aus den Urkunden. Ziel ist es, Personen mit den wichtigsten Rollen wie Aussteller, Empfänger oder Käufer strukturiert aufzubereiten und Varianten desselben Namens zusammenzuführen. Die extrahierten Personen müssen anschließend nochmals manuell gruppiert und mit Informationen angereichert werden. Dies ist der vorletzte Schritt des Schichtmodells.
 
@@ -35,11 +32,9 @@ Dieser Ordner enthält die Skripte zur Erstellung und Anreicherung eines konsoli
 ### `legal_types`
 Dieser Ordner enthält Skripte und Textdateien, die zur Klassifizierung der Rechtsnatur der Urkunden dienen. Ziel ist es, aus verschiedenen Quellen wie den Urkundenbetreffen oder externen Webseiten eine Taxonomie von Transaktionstypen zu extrahieren und zu erstellen. Diese Taxonomie hilft dabei, die Urkunden systematisch zu kategorisieren.
 
----
+### `manage_charte_lists`
+Der Ordner enthält Skripte und Daten zur automatisierten Extraktion, Normalisierung und Anreicherung historischer Urkundeneinträge aus PDF- und Excel-Dokumenten. Ziel ist die strukturierte Aufbereitung für den CSV-Import. Dafür müssen Informationen aus PDF-Dateien sowie aus Excel-Tabellen zusammengeführt werden. Hier entsteht die CSV-Datei, mit der alle Urkunden dann per Quickstatement-Import auf einmal importiert werden. Das ist der letzte Schritt des Schichtmodells.
 
-## gesammelte Erfahrungen:
-
-- Informationen, die in mehreren Tabellen zusammenhängen, sollten mit eindeutigen Identifikatoren verknüpft werden  
-- einheitliche Schreibweisen und Trennzeichen verwenden
-- keine Abkürzungen verwenden
+### `LLM_evaluation`
+Dieser Ordner enthält Skripte zur systematischen Evaluierung verschiedener Ansätze zur automatischen Entitätserkennung (Named Entity Recognition) in historischen Urkundenregesten. Es werden Large Language Models (LLMs) wie GPT-4o, GPT-4.1 und llama-3.3 sowie regelbasierte Ansätze getestet und verglichen. Die Evaluierung erfolgt anhand eines Ground Truth-Datensatzes von 50 zufällig ausgewählten Urkunden und misst die Genauigkeit bei der Extraktion von drei Entitätstypen: Objektorte, Empfängersitze und genannte Personen. Ziel ist es, die Leistungsfähigkeit automatisierter Verfahren für die historische Textanalyse zu bewerten.
 
