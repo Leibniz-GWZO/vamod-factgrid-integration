@@ -23,7 +23,7 @@ Dieser Ordner enthält Skripte zur schrittweisen Aufbereitung der materiellen Ur
 ### `person_extraction`
 Dieser Ordner enthält Skripte und Dokumentationen zur Extraktion, Filterung und Gruppierung historischer Personen mit relevanten Rollen aus den Urkunden. Ziel ist es, Personen mit den wichtigsten Rollen wie Aussteller, Empfänger oder Käufer strukturiert aufzubereiten und Varianten desselben Namens zusammenzuführen. Die extrahierten Personen müssen anschließend nochmals manuell gruppiert und mit Informationen angereichert werden. Dies ist der vorletzte Schritt des Schichtmodells.
 
-### `funciton_extraction`
+### `function_extraction`
 Dieser Ordner dient der Extraktion, Filterung und Vereinheitlichung historischer Funktionsbezeichnungen (Ämter), die Personen in den vormodernen Urkunden zugewiesen werden. Ziel ist es, Ämter der relevanten Personen zu extrahieren und Varianten (z. B. Tippfehler, Schreibvarianten) zu clustern.
 
 ### `place_extraction`
