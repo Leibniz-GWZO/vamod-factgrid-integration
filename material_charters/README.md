@@ -74,4 +74,3 @@ Fügt administrative Zugehörigkeit basierend auf Mustern in der Zusammenfassung
 **Input:** `Urkunden_Metadatenliste_v11.xlsx`  
 **Output:** `Urkunden_Metadatenliste_v12.xlsx`
 
-Erg
